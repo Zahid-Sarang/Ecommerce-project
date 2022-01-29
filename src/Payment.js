@@ -40,7 +40,7 @@ const Payment = () => {
              {/* Payment Gateway */}
              <div className='payment__section'>
              <h3>Payment Method:</h3>
-             <div className='payment-details'>
+             <div className='payment__details'>
                  {/* Strip payment */}
              </div>
                  
