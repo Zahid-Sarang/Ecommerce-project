@@ -6,8 +6,11 @@ import { getCartTotal } from "./reducer";
 import { useStateValue } from "./StateProvider";
 import CurrencyFormat from "react-currency-format";
 import axios from "axios";
+import {useHistory} from 'react-router-dom';
+
 
 function Payment() {
+  const history = useHistory()
   const [{ cart, user }, dispatch] = useStateValue();
 
   const stripe = useStripe();
@@ -40,9 +43,12 @@ useEffect(() => {
           payment_method:{
               card:elements.getElement(CardElement)
           }
-      });
-
-
+      }).then(({paymentIntent}) => {
+        setSucceeded(true);
+        setError(null);
+        setProcessing(false)
+        history.replaceState('/order')
+      })
   };
 
   const handleChange = (event) => {
