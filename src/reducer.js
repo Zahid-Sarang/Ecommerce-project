@@ -40,6 +40,11 @@ const reducer = (state, action) => {
         ...state,
         user: action.user,
       };
+      case 'EMPTY_CART':
+        return {
+          ...state,
+          cart:[]
+        }
     case "INCREMENT":
       let incrementCart = state.cart.map((cur) => {
         if (cur.id === action.payload) {

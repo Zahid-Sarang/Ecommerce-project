@@ -27,14 +27,14 @@ useEffect(() => {
     const getClientSecret = async () => {
         const response = await axios({
             method:'POST',
-            url:`/payment/create?total=${getCartTotal(cart)* 100} `  //stripe expect total amount in base currencies
+            url: `/payment/create?total=${getCartTotal(cart)* 100} `  //stripe expect total amount in base currencies
         });
         setClientSecret(response.data.clientSecret)
     }
     getClientSecret();
 },[cart])
 
-
+console.log('client screte',clientSecret)
   const handleSubmit = async (e) => {
       e.preventDefault();
       setProcessing(true);
@@ -47,6 +47,13 @@ useEffect(() => {
         setSucceeded(true);
         setError(null);
         setProcessing(false)
+         
+        dispatch(
+          {
+            type:'EMPTY_CART',
+          }
+        )
+
         history.replaceState('/order')
       })
   };
